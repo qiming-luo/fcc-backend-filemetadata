@@ -5,12 +5,16 @@ require('dotenv').config()
 var app = express();
 
 app.use(cors());
+app.use(require('morgan')('dev'));
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.get('/', function (req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
+//file upload rout
+const fileUpload = require('./fileMetaData');
+app.use('/api', fileUpload);
 
 
 
